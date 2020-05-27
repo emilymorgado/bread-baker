@@ -1,0 +1,10 @@
+.container {
+  background-color: yellow;
+  height: 100%;
+  width: 75%;
+  border: 4px cyan solid;
+}
+
+ul {
+  list-style: none;
+}

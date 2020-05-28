@@ -1,16 +1,23 @@
 import React from 'react';
 
-const Navigation = () => {
+const Navigation = props => {
   return (
     <div>
-      <button>Active</button>|<button>All</button>
+      <button
+        onClick={props.toggleDisplay}
+        style={{background: props.showAll ? 'white' : 'blue'}}
+      >
+        Active
+      </button>
+      |
+      <button
+        onClick={props.toggleDisplay}
+        style={{background: props.showAll ? 'blue' : 'white'}}
+      >
+      All
+      </button>
     </div>
   )
 }
 
 export default Navigation;
-
-// TODO:
-// onClick button functionality
-// onClick toggles styles
-// onClick toggles view of cards below navbar

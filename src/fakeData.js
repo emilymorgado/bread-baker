@@ -208,7 +208,8 @@ const data = {
   "user": {
     "id": "a",
     "name": "Rainbow",
-    "unlocked": [0]
+    "unlocked": [0, 1],
+    "projectStatuses": {0:2, 1:1}
   }
 }
 

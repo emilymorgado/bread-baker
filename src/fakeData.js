@@ -3,6 +3,7 @@ const data = {
     {
       "id": 0,
       "title": "starter",
+      "description": "A good starter is the key to a great loaf of sourdough bread. Capture wild yeast, care for it, and use it for a lifetime.",
       "directions": [
         [
           "flour",
@@ -57,6 +58,7 @@ const data = {
     {
       "id": 1,
       "title": "basic loaf",
+      "description": "Sourdough bread recipe for beginners.",
       "directions": [
         [
           "active starter (floats in water)",
@@ -131,6 +133,7 @@ const data = {
     {
       "id": 2,
       "title": "basic baguette",
+      "description": "A bit more challenging than the basic loaf.",
       "directions": [
         [
           "active starter (floats in water)",

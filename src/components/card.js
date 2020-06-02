@@ -6,8 +6,9 @@ const Card = props => {
       style={{
         height: '200px',
         width: '200px',
-        background: props.unlocked && props.unlocked > 1 ? 'magenta' : props.unlocked === 1 ? 'green' : 'cyan'
+        background: props.unlocked > 1 ? 'magenta' : props.unlocked === 1 ? 'green' : 'cyan'
       }}
+      onClick={()=>{props.displayDirections(props.recipe)}}
     >
       {props.title}
     </button>
@@ -15,6 +16,3 @@ const Card = props => {
 }
 
 export default Card;
-
-// TODO:
-// onClick button functionality

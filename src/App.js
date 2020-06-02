@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 import Navigation from './components/navigation'
 import Menu from './components/menu'
-import Direction from './components/direction'
+import Directions from './components/directions'
 import './App.css'
 
 class App extends Component {
@@ -34,7 +34,7 @@ class App extends Component {
             showAll={this.state.showAll}
             displayDirections={this.displayDirections}
            /> :
-           <Direction
+           <Directions
             recipe={this.state.openRecipe}
             displayDirections={this.displayDirections}
            />

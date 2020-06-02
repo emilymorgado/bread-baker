@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Direction = props => {
+const Directions = props => {
   return (
     <div>
       {props.recipe.description}
@@ -14,4 +14,4 @@ const Direction = props => {
   )
 }
 
-export default Direction;
+export default Directions;

@@ -2,22 +2,23 @@ import React, {Component} from 'react'
 
 import Navigation from './components/navigation'
 import Menu from './components/menu'
-import data from './fakeData'
+import Direction from './components/direction'
 import './App.css'
 
 class App extends Component {
   state = {
-    userUnlocked: new Set(data.user.unlocked),
     showAll: false,
     showMenu: true,
+    openRecipe: {},
   }
 
   toggleDisplay = () => {
     this.setState({showAll: !this.state.showAll})
   }
 
-  displayNextStep = () => {
+  displayDirections = recipe => {
     this.setState({showMenu: !this.state.showMenu})
+    this.setState({openRecipe: recipe})
   }
 
   render() {
@@ -29,8 +30,14 @@ class App extends Component {
           toggleDisplay={this.toggleDisplay}
          />
          {this.state.showMenu ?
-           <Menu showAll={this.state.showAll} /> :
-           <Menu showAll={this.state.showAll} />
+           <Menu
+            showAll={this.state.showAll}
+            displayDirections={this.displayDirections}
+           /> :
+           <Direction
+            recipe={this.state.openRecipe}
+            displayDirections={this.displayDirections}
+           />
          }
       </div>
     )

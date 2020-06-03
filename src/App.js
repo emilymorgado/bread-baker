@@ -23,12 +23,14 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
          <h1>PROJECTS</h1>
-         <Navigation
-          showAll={this.state.showAll}
-          toggleDisplay={this.toggleDisplay}
-         />
+         {this.state.showMenu &&
+           <Navigation
+            showAll={this.state.showAll}
+            toggleDisplay={this.toggleDisplay}
+           />
+         }
          {this.state.showMenu ?
            <Menu
             showAll={this.state.showAll}

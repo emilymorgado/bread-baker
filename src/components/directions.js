@@ -2,8 +2,8 @@ import React from 'react';
 
 const Directions = props => {
   return (
-    <div>
-      {props.recipe.description}
+    <div className='directions'>
+      <p>{props.recipe.description}</p>
       <button>Get Started</button>
       <button
         onClick={()=>{props.displayDirections(null)}}

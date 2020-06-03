@@ -47,7 +47,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <ul className='container'>
+      <ul className='container-cards'>
       {this.props.showAll ?
         this.allRecipes :
         this.activeRecipes}

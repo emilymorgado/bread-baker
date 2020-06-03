@@ -1,10 +1,65 @@
 .container {
-  background-color: yellow;
+  background-color: #FFFFFC;
   height: 100%;
-  width: 75%;
-  border: 4px cyan solid;
+  color: #001011;
+}
+
+.container h1 {
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  border-radius: 5px;
+  padding: 1%;
+  padding-left: 1.25%;
+  margin: .25%;
+  font-size: 1.5em;
+}
+
+button:hover {
+  background-color: #F5E642;
+}
+
+.container-cards {
+  display: flex;
+  justify-content: center;
+}
+
+.container-cards button {
+  height: 200px;
+  width: 200px;
+  margin: 3px;
+  border: none;
+  font-size: 2em;
 }
 
 ul {
   list-style: none;
 }
+
+.directions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+  margin: 1% 20%;
+  border: 4px #757780 solid;
+}
+
+.directions p {
+  font-size: 1.5em;
+}
+
+
+
+/* blue #6CCFF6 */
+/* black #001011 */
+/* grey #757780 */
+/* white #FFFFFC */
+/* green #98CE00 */

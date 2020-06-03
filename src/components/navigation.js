@@ -2,18 +2,15 @@ import React from 'react';
 
 const Navigation = props => {
   return (
-    <div>
+    <div className='nav'>
       <button
         onClick={props.toggleDisplay}
-        style={{background: props.showAll ? 'white' : 'blue'}}
-      >
+        style={{background: props.showAll ? '#FFFFFC' : '#F5E642'}}>
         Active
       </button>
-      |
       <button
         onClick={props.toggleDisplay}
-        style={{background: props.showAll ? 'blue' : 'white'}}
-      >
+        style={{background: props.showAll ? '#F5E642' : '#FFFFFC'}}>
       All
       </button>
     </div>

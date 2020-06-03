@@ -4,9 +4,7 @@ const Card = props => {
   return (
     <button
       style={{
-        height: '200px',
-        width: '200px',
-        background: props.unlocked > 1 ? 'magenta' : props.unlocked === 1 ? 'green' : 'cyan'
+        background: props.unlocked > 1 ? '#98CE00' : props.unlocked === 1 ? '#6CCFF6' : '#757780'
       }}
       onClick={()=>{props.displayDirections(props.recipe)}}
     >

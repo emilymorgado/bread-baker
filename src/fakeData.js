@@ -212,7 +212,8 @@ const data = {
     "id": "a",
     "name": "Rainbow",
     "unlocked": [0, 1],
-    "projectStatuses": {0:2, 1:1}
+    "projectStatuses": {0:2, 1:1},
+    "activeProjects": {0:0}
   }
 }
 

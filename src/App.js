@@ -16,9 +16,14 @@ class App extends Component {
     this.setState({showAll: !this.state.showAll})
   }
 
-  displayDirections = recipe => {
-    this.setState({showMenu: !this.state.showMenu})
-    this.setState({openRecipe: recipe})
+  displayDirections = (recipe, status, step) => {
+    if (status) {
+      this.setState({showMenu: false})
+      this.setState({openRecipe: recipe})
+    } else {
+      this.setState({showMenu: true})
+      this.setState({openRecipe: {}})
+    }
   }
 
   render() {

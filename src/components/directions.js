@@ -6,7 +6,7 @@ const Directions = props => {
       <p>{props.recipe.description}</p>
       <button>Get Started</button>
       <button
-        onClick={()=>{props.displayDirections(null)}}
+        onClick={()=>{props.displayDirections(null, null, null)}}
       >
       Home
       </button>

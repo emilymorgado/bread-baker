@@ -10,17 +10,17 @@ class Menu extends Component {
 
   allRecipes = data.recipes.map(recipe => {
     let unlocked = this.state.userUnlocked.has(recipe.id)
-    let displayDirections = null
     if (unlocked) {
       unlocked = data.user.projectStatuses[recipe.id]
-      displayDirections = this.props.displayDirections
     }
     return (
       <li key={recipe.id}>
         <Card
           title={recipe.title}
           unlocked={unlocked}
-          displayDirections={displayDirections}
+          displayDirections={this.props.displayDirections}
+          userRecipeStatus={data.user.projectStatuses[recipe.id]}
+          userRecipeStep={data.user.activeProjects[recipe.id]}
           recipe={recipe}
         />
       </li>
@@ -35,9 +35,11 @@ class Menu extends Component {
         <li key={recipe.id}>
           <Card
             title={recipe.title}
-            unlocked={unlocked}
             recipe={recipe}
+            unlocked={unlocked}
             displayDirections={this.props.displayDirections}
+            userRecipeStatus={data.user.projectStatuses[recipe.id]}
+            userRecipeStep={data.user.activeProjects[recipe.id]}
           />
         </li>
       )

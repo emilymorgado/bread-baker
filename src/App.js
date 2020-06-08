@@ -10,6 +10,8 @@ class App extends Component {
     showAll: false,
     showMenu: true,
     openRecipe: {},
+    activeStatus: null,
+    activeStep: null,
   }
 
   toggleDisplay = () => {
@@ -20,9 +22,13 @@ class App extends Component {
     if (status) {
       this.setState({showMenu: false})
       this.setState({openRecipe: recipe})
+      this.setState({activeStatus: status})
+      this.setState({activeStep: step})
     } else {
       this.setState({showMenu: true})
       this.setState({openRecipe: {}})
+      this.setState({activeStatus: null})
+      this.setState({activeStep: null})
     }
   }
 
@@ -44,6 +50,8 @@ class App extends Component {
            <Directions
             recipe={this.state.openRecipe}
             displayDirections={this.displayDirections}
+            status={this.state.activeStatus}
+            step={this.state.activeStep}
            />
          }
       </div>

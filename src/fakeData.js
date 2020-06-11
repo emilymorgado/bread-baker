@@ -1,10 +1,12 @@
 const data = {
   "recipes": [
     {
-      "id": 0,
+      "id": "0",
       "title": "starter",
-      "description": "A good starter is the key to a great loaf of sourdough bread. Capture wild yeast, care for it, and use it for a lifetime.",
       "directions": [
+        {
+          "direction": "We will make a sourdough starter. A good starter is the key to a great loaf of sourdough bread. Capture wild yeast, care for it, and use it for a lifetime."
+        },
         [
           "flour",
           "a scale that measures in grams",
@@ -56,10 +58,12 @@ const data = {
       ]
     },
     {
-      "id": 1,
+      "id": "1",
       "title": "basic loaf",
-      "description": "Sourdough bread recipe for beginners.",
       "directions": [
+        {
+          "direction": "We will make a beginnr-friendly loaf of sourdough bread."
+        },
         [
           "active starter (floats in water)",
           "flour",
@@ -131,10 +135,12 @@ const data = {
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "basic baguette",
-      "description": "A bit more challenging than the basic loaf.",
       "directions": [
+        {
+          "direction": "We will make a sourdough baguette."
+        },
         [
           "active starter (floats in water)",
           "flour",
@@ -211,9 +217,8 @@ const data = {
   "user": {
     "id": "a",
     "name": "Rainbow",
-    "unlocked": [0, 1],
-    "projectStatuses": {0:2, 1:1},
-    "activeProjects": {0:1}
+    "unlocked": {"0":1, "1":0, "2":0},
+    "checklists": {"0":[1], "2":[0,9]}
   }
 }
 

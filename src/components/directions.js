@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import ShoppingList from './shoppingList'
 
 const Directions = props => {
   return (
@@ -7,8 +8,13 @@ const Directions = props => {
         : props.step === 1 ? `Make sure you have:`
         : `Next Step:`}
       </h2>
-      <p>{props.step === 1 ? "STEP ONE" : props.recipe.directions[props.step].direction}
-      </p>
+      {
+        props.step === 1 ? <ShoppingList
+                              items={props.recipe.directions[props.step]}
+                              obtaimedItems={null}
+                          />
+        : <p>{props.recipe.directions[props.step].direction}</p>
+      }
       <button>Get Started</button>
       <button onClick={()=>{props.displayDirections()}}>
       Home

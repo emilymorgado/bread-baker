@@ -5,13 +5,13 @@ import data from '../fakeData'
 
 class Menu extends Component {
   state = {
-    userUnlocked: new Set(data.user.unlocked),
+    userUnlocked: new Set(Object.keys(data.user.unlocked)),
   }
 
   allRecipes = data.recipes.map(recipe => {
-    let unlocked = this.state.userUnlocked.has(recipe.id)
+    let unlocked = this.state.userUnlocked.has(recipe.id)  //bool
     if (unlocked) {
-      unlocked = data.user.projectStatuses[recipe.id]
+      unlocked = data.user.unlocked[recipe.id] //Number for status and step
     }
     return (
       <li key={recipe.id}>
@@ -19,18 +19,17 @@ class Menu extends Component {
           title={recipe.title}
           unlocked={unlocked}
           displayDirections={this.props.displayDirections}
-          userRecipeStatus={data.user.projectStatuses[recipe.id]}
-          userRecipeStep={data.user.activeProjects[recipe.id]}
           recipe={recipe}
         />
       </li>
     )
   })
 
+  // TODO: query/fetch just the unlocked recipes and iterate over that
   activeRecipes = data.recipes.map(recipe => {
-    let unlocked = this.state.userUnlocked.has(recipe.id)
+    let unlocked = this.state.userUnlocked.has(recipe.id)  //bool
     if (unlocked) {
-      unlocked = data.user.projectStatuses[recipe.id]
+      unlocked = data.user.unlocked[recipe.id] //Number for status and step
       return (
         <li key={recipe.id}>
           <Card
@@ -38,8 +37,6 @@ class Menu extends Component {
             recipe={recipe}
             unlocked={unlocked}
             displayDirections={this.props.displayDirections}
-            userRecipeStatus={data.user.projectStatuses[recipe.id]}
-            userRecipeStep={data.user.activeProjects[recipe.id]}
           />
         </li>
       )

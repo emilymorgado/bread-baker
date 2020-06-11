@@ -10,7 +10,6 @@ class App extends Component {
     showAll: false,
     showMenu: true,
     openRecipe: {},
-    activeStatus: null,
     activeStep: null,
   }
 
@@ -18,17 +17,13 @@ class App extends Component {
     this.setState({showAll: !this.state.showAll})
   }
 
-  displayDirections = (recipe, status, step) => {
-    if (status) {
-      this.setState({showMenu: false})
-      this.setState({openRecipe: recipe})
-      this.setState({activeStatus: status})
-      this.setState({activeStep: step})
-    } else {
+  displayDirections = (recipe, step) => {
+    if (step === false) {
       this.setState({showMenu: true})
-      this.setState({openRecipe: {}})
-      this.setState({activeStatus: null})
-      this.setState({activeStep: null})
+    } else {
+      this.setState({showMenu: !this.state.showMenu})
+      this.setState({openRecipe: recipe})
+      this.setState({activeStep: step})
     }
   }
 
@@ -50,7 +45,6 @@ class App extends Component {
            <Directions
             recipe={this.state.openRecipe}
             displayDirections={this.displayDirections}
-            status={this.state.activeStatus}
             step={this.state.activeStep}
            />
          }

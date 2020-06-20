@@ -45,7 +45,7 @@ class App extends Component {
            <Directions
             recipe={this.state.openRecipe}
             displayDirections={this.displayDirections}
-            step={this.state.activeStep}
+            step={Number(this.state.activeStep)}
            />
          }
       </div>

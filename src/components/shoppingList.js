@@ -1,8 +1,14 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class ShoppingList extends Component {
   state = {
-    checked: false
+    checked: new Array(this.props.items.direction.length).fill(false),
+  }
+
+  handleCheckboxChange(index) {
+    let newChecked = this.state.checked
+    newChecked[index] = !this.state.checked[index]
+    this.setState({ checked: newChecked })
   }
 
   render() {
@@ -10,11 +16,13 @@ class ShoppingList extends Component {
       <ul>
         {this.props.items.direction.map((item, index) => (
           <li key={index}>
-            <label>
+            <label className='list-shopping'>
               <input
+                className='checkbox-shopping'
+                name={index}
                 type='checkbox'
-                checked={this.state.checked}
-                onChange={this.handleCheckboxChange}
+                checked={this.state.checked[index]}
+                onChange={() => this.handleCheckboxChange(index)}
               />
               {item}
               </label>

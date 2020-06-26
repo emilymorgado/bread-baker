@@ -56,7 +56,16 @@ ul {
   font-size: 1.5em;
 }
 
+.list-shopping {
+  font-size: 2em;
+  cursor: pointer;
+}
 
+.checkbox-shopping {
+  margin: 10px;
+  height: 2em;
+  width: 2em;
+}
 
 /* blue #6CCFF6 */
 /* black #001011 */

@@ -15,7 +15,6 @@ class Menu extends Component {
     let recipesRef = firebase.collection('recipes')
     recipesRef.get().then(recipes => {
       const allRecipes = []
-
       recipes.forEach(recipe => {
         allRecipes.push({'id': recipe.id, 'recipe': recipe.data()})
       })

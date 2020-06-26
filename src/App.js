@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import Navigation from './components/navigation'
 import Menu from './components/menu'

@@ -9,16 +9,15 @@ const Directions = props => {
         : `Next Step:`}
       </h2>
       {
-        props.step === 1 ? <ShoppingList
-                              items={props.recipe.directions[props.step]}
-                              obtaimedItems={null}
-                          />
+        props.step === 1 ?
+          <ShoppingList
+            items={props.recipe.directions[props.step]}
+            obtaimedItems={null}
+          />
         : <p>{props.recipe.directions[props.step].direction}</p>
       }
       <button>Get Started</button>
-      <button onClick={()=>{props.displayDirections()}}>
-      Home
-      </button>
+      <button onClick={()=>{props.displayDirections()}}>Home</button>
     </div>
   )
 }

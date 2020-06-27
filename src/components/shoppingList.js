@@ -13,20 +13,22 @@ class ShoppingList extends Component {
 
   render() {
     return (
-      <ul>
+      <ul className='container-shopping'>
         {this.props.items.direction.map((item, index) => (
-          <li key={index}>
-            <label className='list-shopping'>
-              <input
-                className='checkbox-shopping'
-                name={index}
-                type='checkbox'
-                checked={this.state.checked[index]}
-                onChange={() => this.handleCheckboxChange(index)}
-              />
+          <li
+            className='list-shopping'
+            key={index}
+            onClick={() => this.handleCheckboxChange(index)}>
+            <input
+              className='checkbox-shopping'
+              name={index}
+              type='checkbox'
+              checked={this.state.checked[index]}
+            />
+            <label className='list-shopping' for='checkbox-shopping'>
               {item}
-              </label>
-            </li>
+            </label>
+          </li>
         ))}
       </ul>
     )

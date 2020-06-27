@@ -57,12 +57,14 @@ ul {
 }
 
 .list-shopping {
-  font-size: 2em;
+  font-size: 1.5em;
   cursor: pointer;
+  margin: 10px 0;
 }
 
 .checkbox-shopping {
-  margin: 10px;
+  cursor: pointer;
+  margin-right: 10px;
   height: 2em;
   width: 2em;
 }

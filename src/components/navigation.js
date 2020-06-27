@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 const Navigation = props => {
   return (
@@ -15,6 +16,11 @@ const Navigation = props => {
       </button>
     </div>
   )
+}
+
+Navigation.propTypes ={
+  showAll: PropTypes.bool,
+  toggleDisplay: PropTypes.func,
 }
 
 export default Navigation;

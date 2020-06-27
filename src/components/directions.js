@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
+
 import ShoppingList from './shoppingList'
 
 const Directions = props => {
@@ -19,7 +21,7 @@ const Directions = props => {
         : props.step === 1 ?
           <ShoppingList
             items={props.recipe.directions[props.step]}
-            obtaimedItems={null}
+            // obtaimedItems={null} must be fetched from firebase
           />
         : <p>{props.recipe.directions[props.step].direction}</p>
       }
@@ -27,6 +29,12 @@ const Directions = props => {
       <button onClick={()=>{props.displayDirections()}}>Home</button>
     </div>
   )
+}
+
+Directions.propTypes = {
+  displayDirections: PropTypes.func.isRequired,
+  recipe: PropTypes.object.isRequired,
+  step: PropTypes.number.isRequired,
 }
 
 export default Directions;

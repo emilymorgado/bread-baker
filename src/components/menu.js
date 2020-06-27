@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import firebase from '../firestore'
 import Card from './card'
@@ -79,6 +80,11 @@ class Menu extends Component {
       </ul>
     )
   }
+}
+
+Menu.propTypes ={
+  displayDirections: PropTypes.func,
+  showAll: PropTypes.bool,
 }
 
 export default Menu;

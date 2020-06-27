@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { PropTypes } from 'prop-types'
 
 class ShoppingList extends Component {
   state = {
@@ -24,8 +25,9 @@ class ShoppingList extends Component {
               name={index}
               type='checkbox'
               checked={this.state.checked[index]}
+              onChange={() => {}}
             />
-            <label className='list-shopping' for='checkbox-shopping'>
+            <label className='list-shopping'>
               {item}
             </label>
           </li>
@@ -33,6 +35,11 @@ class ShoppingList extends Component {
       </ul>
     )
   }
+}
+
+ShoppingList.propTypes ={
+  items: PropTypes.object,
+  // obtainedItems: null,
 }
 
 export default ShoppingList;

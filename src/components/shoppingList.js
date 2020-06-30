@@ -1,60 +1,49 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { PropTypes } from 'prop-types'
 
-class ShoppingList extends Component {
-  state = {
-    checked: new Array(this.props.items.direction.length).fill(false),
-    numberChecked: 0, // will be a number based on data in firebase
-    obtainedAllIngredients: false,
+
+const ShoppingList = ({ items }) => {
+  const [checked, setChecked] = useState(new Array(items.direction.length).fill(false))
+  const [numberChecked, setNumberChecked] = useState(0)
+  const [obtainedAllIngredients, setObtainedAllIngredients] = useState(false)
+
+  const handleCheckboxChange = index => {
+    let newChecked = checked
+    let newNumberChecked = numberChecked
+
+    newChecked[index] = !checked[index]
+    checked[index] ? newNumberChecked++ : newNumberChecked--
+    let obtained = checked.length === newNumberChecked ? true : false
+
+    setChecked(newChecked)
+    setNumberChecked(newNumberChecked)
+    setObtainedAllIngredients(obtained)
   }
 
-  handleCheckboxChange(index) {
-    let newChecked = this.state.checked
-    let newNumberChecked = this.state.numberChecked
-
-    newChecked[index] = !this.state.checked[index]
-    this.state.checked[index] ? newNumberChecked++ : newNumberChecked--
-    let obtained = this.state.checked.length === newNumberChecked ? true : false
-
-    this.setState({
-      checked: newChecked,
-      numberChecked: newNumberChecked,
-      obtainedAllIngredients: obtained,
-    })
-
-    if (this.state.checked.length === newNumberChecked) {
-      this.setState({ obtainedAllIngredients: true })
-    } else {
-      this.setState({ obtainedAllIngredients: false })
-    }
-  }
-
-  render() {
-    return (
-      <Fragment>
-      <ul className='container-shopping'>
-        {this.props.items.direction.map((item, index) => (
-          <li
-            className='list-shopping'
-            key={index}
-            onClick={() => this.handleCheckboxChange(index)}>
-            <input
-              className='checkbox-shopping'
-              name={index}
-              type='checkbox'
-              checked={this.state.checked[index]}
-              onChange={() => {}}
-            />
-            <label className='list-shopping'>
-              {item}
-            </label>
-          </li>
-        ))}
-      </ul>
-      {this.state.obtainedAllIngredients && <button>Now, let's get cooking!</button>}
-      </Fragment>
-    )
-  }
+  return (
+    <Fragment>
+    <ul className='container-shopping'>
+      {items.direction.map((item, index) => (
+        <li
+          className='list-shopping'
+          key={index}
+          onClick={() => handleCheckboxChange(index)}>
+          <input
+            className='checkbox-shopping'
+            name={index}
+            type='checkbox'
+            checked={checked[index]}
+            onChange={() => {}}
+          />
+          <label className='list-shopping'>
+            {item}
+          </label>
+        </li>
+      ))}
+    </ul>
+    {obtainedAllIngredients && <button>Now, let's get cooking!</button>}
+    </Fragment>
+  )
 }
 
 ShoppingList.propTypes ={

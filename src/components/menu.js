@@ -1,70 +1,71 @@
-import React, {Component} from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import firebase from '../firestore'
 import Card from './card'
 
-class Menu extends Component {
-  state = {
-    userUnlocked: new Set(),
-    // TODO: store in future - activeRecipes: [],
-    allRecipes: [],
-    user: null,
-  }
 
-  componentDidMount() {
-    let recipesRef = firebase.collection('recipes')
+const Menu = ({ displayDirections, showAll }) => {
+  const [unlockedRecipes, setUnlockedRecipes] = useState(new Set())  //change var name
+  const [allRecipes, setAllRecipes] = useState([])
+  const [user, setUser] = useState(null)
+
+
+  useEffect(() => {
+    const recipesRef = firebase.collection('recipes')
     recipesRef.get().then(recipes => {
       const allRecipes = []
       recipes.forEach(recipe => {
         allRecipes.push({'id': recipe.id, 'recipe': recipe.data()})
       })
-      this.setState({allRecipes: allRecipes})
+      setAllRecipes(allRecipes)
     })
+  }, [])
 
-    let userRef = firebase.collection('users').doc('rCHHc9Pi7u6OYMaEF9ez')
+  useEffect(() => {
+    const userRef = firebase.collection('users').doc('rCHHc9Pi7u6OYMaEF9ez')
     userRef.get().then(doc => {
       if (!doc.exists) {
         console.warn('No such document!');
       } else {
-        this.setState({user: doc.data()})
-        this.setState({userUnlocked: new Set(Object.keys(doc.data().unlocked))})
+        setUser(doc.data())
+        setUnlockedRecipes(new Set(Object.keys(doc.data().unlocked)))
       }
     })
     .catch(err => {
       console.warn('Error getting document', err);
     })
-  }
+  }, [])
 
-  render() {
-    const displayAllRecipes = (this.state.allRecipes).map(recipe => {
-      let unlocked = this.state.userUnlocked.has(recipe.id)
+
+    const displayAllRecipes = (allRecipes).map(recipe => {
+      let unlocked = unlockedRecipes.has(recipe.id)
       if (unlocked) {
-        unlocked = this.state.user.unlocked[recipe.id] //Number for status and step
+        unlocked = user.unlocked[recipe.id] //Number for status and step
       }
       return (
         <li key={recipe.id}>
           <Card
             title={recipe.recipe.title}
             unlocked={unlocked}
-            displayDirections={this.props.displayDirections}
+            displayDirections={displayDirections}
             recipe={recipe.recipe}
           />
         </li>
       )
     })
 
-    const displayActiveRecipes = this.state.allRecipes.map(recipe => {
-      let unlocked = this.state.userUnlocked.has(recipe.id)
+    const displayActiveRecipes = allRecipes.map(recipe => {
+      let unlocked = unlockedRecipes.has(recipe.id)
       if (unlocked) {
-        unlocked = this.state.user.unlocked[recipe.id]
+        unlocked = user.unlocked[recipe.id]
         return (
           <li key={recipe.id}>
             <Card
               title={recipe.recipe.title}
               recipe={recipe.recipe}
               unlocked={unlocked}
-              displayDirections={this.props.displayDirections}
+              displayDirections={displayDirections}
             />
           </li>
         )
@@ -74,12 +75,9 @@ class Menu extends Component {
 
     return (
       <ul className='container-cards'>
-        {this.props.showAll ?
-          displayAllRecipes :
-          displayActiveRecipes}
+        {showAll ? displayAllRecipes : displayActiveRecipes}
       </ul>
     )
-  }
 }
 
 Menu.propTypes ={

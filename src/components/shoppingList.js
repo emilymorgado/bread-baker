@@ -41,7 +41,7 @@ const ShoppingList = ({ items }) => {
         </li>
       ))}
     </ul>
-    {obtainedAllIngredients && <button>Now, let's get cooking!</button>}
+    {obtainedAllIngredients && <button>Now, let&apos;s get cooking!</button>}
     </Fragment>
   )
 }

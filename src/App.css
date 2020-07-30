@@ -69,6 +69,50 @@ ul {
   width: 2em;
 }
 
+.container-user-navigation {
+  float: right;
+}
+
+.container-cooking-navigation {
+  float: left;
+}
+
+.container-top-navigation {
+  height: 70px;
+}
+
+.container-user-navigation-open {
+  width: 200px;
+  padding: 0;
+}
+
+container-user-navigation-open ul {
+  padding: 0;
+}
+
+.container-nav-item {
+  height: 40px;
+  background-color: aquamarine;
+  border: 3px solid mediumaquamarine;
+}
+
+.nav-item-label {
+  display: inline;
+  font-size: 30px;
+  padding-left: 10px;
+}
+
+.nav-item-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.navigation-icon {
+  height: 50px;
+  width: 50px;
+  background-color: violet;
+  color: magenta;
+}
 /* blue #6CCFF6 */
 /* black #001011 */
 /* grey #757780 */

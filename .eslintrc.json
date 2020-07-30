@@ -1,46 +1,47 @@
 {
-    "env": {
-        "browser": true,
-        "es2020": true
-    },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    },
-    "settings": {
-        "react": {
-          "createClass": "createReactClass",
-          "pragma": "React",
-          "version": "detect"
-        },
-        "propWrapperFunctions": [
-            "forbidExtraProps",
-            {
-              "property": "freeze",
-              "object": "Object"
-            },
-            {
-              "property": "myFavoriteWrapper"
-            }
-        ],
-        "linkComponents": [
-            "Hyperlink",
-            {
-              "name": "Link",
-              "linkAttribute": "to"
-            }
-        ]
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 10,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
     }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+  },
+  "settings": {
+    "json/ignore-files": ["**/package-lock.json"],
+    "json/sort-package-json": "standard",
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    },
+    "propWrapperFunctions": [
+      "forbidExtraProps",
+      {
+        "property": "freeze",
+        "object": "Object"
+      },
+      {
+        "property": "myFavoriteWrapper"
+      }
+    ],
+    "linkComponents": [
+      "Hyperlink",
+      {
+        "name": "Link",
+        "linkAttribute": "to"
+      }
+    ]
+  }
 }

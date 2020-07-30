@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 
-import Navigation from './components/navigation'
+import ProjectNavigation from './components/projectNavigation'
 import Menu from './components/menu'
 import Directions from './components/directions'
+import TopNavigation from './components/topNavigation/topNavigation'
 import './App.css'
 
 
@@ -28,9 +29,10 @@ const App = () => {
 
   return (
     <div className="container">
-       <h1>PROJECTS</h1>
+      <TopNavigation/>
+      <h1>PROJECTS</h1>
        {showMenu &&
-         <Navigation
+         <ProjectNavigation
           showAll={showAll}
           toggleDisplay={toggleDisplay}
          />

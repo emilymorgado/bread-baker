@@ -84,16 +84,19 @@ ul {
 .container-user-navigation-open {
   width: 200px;
   padding: 0;
+  margin: 0;
 }
 
-container-user-navigation-open ul {
+.container-user-navigation-open ul {
   padding: 0;
+  margin: 0;
 }
 
 .container-nav-item {
-  height: 40px;
+  height: 50px;
   background-color: aquamarine;
   border: 3px solid mediumaquamarine;
+  padding: 6px;
 }
 
 .nav-item-label {
@@ -103,8 +106,8 @@ container-user-navigation-open ul {
 }
 
 .nav-item-icon {
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: 50px;
 }
 
 .navigation-icon {

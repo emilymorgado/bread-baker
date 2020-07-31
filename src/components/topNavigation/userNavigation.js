@@ -1,53 +1,45 @@
 import React, { useState } from 'react'
-import { RiAlertLine, RiGuideLine } from 'react-icons/ri'
+import { RiAccountCircleLine, RiAlertLine, RiGuideLine } from 'react-icons/ri'
 
 import NavItem from './navItem'
+import {
+  commonAllergies,
+  dietOptions,
+  testAllergies,
+  testDiets
+} from './staticData'
+
 
 const UserNavigation = () => {
-  const testDiets = [true, false, false, false, false, false, false, false, true, false, true, false]
-  const testAllergies = [false, false, false, false, false, false, false, false, true]
   const [showDiets, setShowDiets] = useState(false)
-  const [userDiets, setUserDiets] = useState(testDiets)
   const [showAllergies, setShowAllergies] = useState(false)
-  const [userAllergies, setUserAllergies] = useState(testAllergies)
+  const [showAccount, setShowAccount] = useState(false)
 
-  const handleDietClick = () => {
-    let newStatus = !showDiets
-    setShowDiets(newStatus)
+  const [userDiets, setUserDiets] = useState(testDiets)
+  const [allergies, setAllergies] = useState(testAllergies)
+  const [userInfo, setUserInfo] = useState({name:'', email:'', password:''})
+
+  const handleItemClick = (navItem, update) => {
+    let newStatus = !navItem
+    update(newStatus)
   }
 
-  const handleDietCheckboxChange = (index) => {
-    //this update works, but the UI is not updating
+  const handleCheckboxChange = (index, category, update) => {
+    //this update works in state, but not in the UI
     //it seems setState() isn't triggering an update
-    //this is happening with allergies too
     //placement of these components is not ideal
-    //TODO: refactor placement and fix this bug
-    let dietCopy = userDiets
-    dietCopy[index] = !userDiets[index]
-    setUserDiets(dietCopy)
+    //TODO: refactor placement and fix bug
+    let copy = category
+    copy[index] = !category[index]
+    update(copy)
   }
-
-  const dietOptions = [
-    'vegetarian',
-    'vegan',
-    'low-fat',
-    'low-carbohydrate',
-    'paleo',
-    'ketogenic',
-    'alkaline',
-    'gluten-free',
-    'low-FODMAP',
-    'Mediterranean',
-    'MIND',
-    'DASH',
-  ]
 
   const diets = dietOptions.map((option, index) => {
     return (
       <li
         className='list-shopping'
         key={option}
-        onClick={() => handleDietCheckboxChange(index)}>
+        onClick={() => handleCheckboxChange(index, userDiets, setUserDiets)}>
         <input
           className='checkbox-shopping'
           name={option}
@@ -62,40 +54,17 @@ const UserNavigation = () => {
     )
   })
 
-  const handleAllergyClick = () => {
-    let newStatus = !showAllergies
-    setShowAllergies(newStatus)
-  }
-
-  const handleAllergyCheckboxChange = (index) => {
-    let allergyCopy = userAllergies
-    allergyCopy[index] = !userAllergies[index]
-    setUserAllergies(allergyCopy)
-  }
-
-  const commonAllergies = [
-    'milk',
-    'eggs',
-    'tree nuts',
-    'peanuts',
-    'wheat',
-    'soy',
-    'shellfish',
-    'fish',
-    'sesame',
-  ]
-
-  const allergies = commonAllergies.map((allergy, index) => {
+  const userAllergies = commonAllergies.map((allergy, index) => {
     return (
       <li
         className='list-shopping'
         key={allergy}
-        onClick={() => handleAllergyCheckboxChange(index)}>
+        onClick={() => handleCheckboxChange(index, allergies, setAllergies)}>
         <input
           className='checkbox-shopping'
           name={allergy}
           type='checkbox'
-          checked={userAllergies[index]}
+          checked={allergies[index]}
           onChange={() => {}}
         />
         <label className='list-shopping'>
@@ -105,16 +74,63 @@ const UserNavigation = () => {
     )
   })
 
+  const handleTextChange = (identifier, event) => {
+    let copy = userInfo
+    let newValue = event.target.value
+    copy[identifier] = newValue
+    setUserInfo(copy)
+  };
+
+  const accountView = (
+    <ul>
+      <li>
+        <p>Name:</p>
+        <input
+          className='textarea-account'
+          type='text'
+          placeholder={userInfo.name}
+          onChange={(event) => handleTextChange('name', event)}
+          value={userInfo.name}
+        />
+      </li>
+      <li>
+        <p>Email:</p>
+        <input
+          className='textarea-account'
+          type='email'
+          placeholder={userInfo.email}
+          onChange={(event) => handleTextChange('email', event)}
+          value={userInfo.email}
+        />
+      </li>
+      <li>
+        <p>Password:</p>
+        <input
+          className='textarea-account'
+          type='password'
+          placeholder={userInfo.password}
+          onChange={(event) => handleTextChange('password', event)}
+          value={userInfo.password}
+        />
+      </li>
+    </ul>
+  )
+
   const navItems = [
     {
       label: 'Diets',
       icon: (<RiGuideLine className='nav-item-icon' />),
-      handleClick: handleDietClick,
+      handleClick: () => handleItemClick(showDiets, setShowDiets),
     },
     {
       label: 'Allergies',
       icon: (<RiAlertLine className='nav-item-icon' />),
-      handleClick: handleAllergyClick,
+      handleClick: () => handleItemClick(showAllergies, setShowAllergies),
+    },
+    {
+      label: 'Account',
+      icon: (<RiAccountCircleLine className='nav-item-icon' />),
+      handleClick: () => handleItemClick(showAccount, setShowAccount),
     },
   ]
 
@@ -133,7 +149,8 @@ const UserNavigation = () => {
         ))}
       </ul>
       <ul>{showDiets && diets}</ul>
-      <ul>{showAllergies && allergies}</ul>
+      <ul>{showAllergies && userAllergies}</ul>
+      {showAccount && accountView}
     </div>
   )
 }

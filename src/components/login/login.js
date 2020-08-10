@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import PropTypes from 'prop-types'
-import firebase from '../../firestore'
+
+import AccountCreation from './accountCreation'
 
 
 const Login = ({ isOpen }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen)
+  // 0 = initial
+  // 1 = login
+  // 2 = create account
+  // 3 = food info: diet and allergies
   const [activeContent, setActiveContent] = useState(false)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
   const toggleModal = () => {
     let newView = !isModalOpen
     setIsModalOpen(newView)
   }
 
-  const changeContent = () => {
-    let newContent = !activeContent
+  const changeContent = newContent => {
+    // let newContent = !activeContent
     setActiveContent(newContent)
   }
 
@@ -26,84 +28,44 @@ const Login = ({ isOpen }) => {
       <button className='modal-close' onClick={toggleModal}>X</button>
       <button
         className='button-login'
-        onClick={changeContent}>
+        onClick={() => changeContent(1)}>
         Login
       </button>
       <button
         className='button-create-account'
-        onClick={changeContent}>
+        onClick={() => changeContent(2)}>
         Create Account
       </button>
     </span>
   )
 
-  const handleTextChange = (update, event) => {
-    update(event.target.value)
-  };
-
-  const createAccount = () => {
-    if (name && email && password) {
-      firebase.collection('users').add({
-        name: name,
-        email: email,
-        password: password
-      })
-      .then(function(docRef) {
-        console.log(`Document successfully written: ${docRef}`);
-        setName('')
-        setEmail('')
-        setPassword('')
-      })
-      .catch(function(error) {
-        console.error(`Error writing document: ${error}`);
-      })
-    } else {
-      console.log("TODO: add error handling")
-    }
-  }
-
-  const accountCreateContent = (
+  const loginContent = (
     <span>
       <button className='modal-close' onClick={toggleModal}>X</button>
-      <ul>
-        <li>
-          <p>Name:</p>
-          <input
-            className='textarea-account'
-            type='text'
-            placeholder={name}
-            onChange={(event) => handleTextChange(setName, event)}
-            value={name}
-          />
-        </li>
-        <li>
-          <p>Email:</p>
-          <input
-            className='textarea-account'
-            type='email'
-            placeholder={email}
-            onChange={(event) => handleTextChange(setEmail, event)}
-            value={email}
-          />
-        </li>
-        <li>
-          <p>Password:</p>
-          <input
-            className='textarea-account'
-            type='password'
-            placeholder={password}
-            onChange={(event) => handleTextChange(setPassword, event)}
-            value={password}
-          />
-        </li>
-      </ul>
-      <button onClick={createAccount}>Create Account!</button>
+      <div>COMING SOON</div>
     </span>
   )
 
+  const foodInfo = (
+    <span>
+      <button className='modal-close' onClick={toggleModal}>X</button>
+      <div>NEXT UP</div>
+    </span>
+  )
+
+  // 0 = initial
+  // 1 = login
+  // 2 = create account
+  // 3 = food info: diet and allergies
+
   return (
     <ReactModal isOpen={isModalOpen}>
-      {activeContent ? accountCreateContent : initialContent}
+      {
+        activeContent === 3 ? foodInfo
+        : activeContent === 2 ? <AccountCreation changeContent={changeContent} />
+        : activeContent === 1 ? loginContent
+        : initialContent
+      }
     </ReactModal>
   )
 }

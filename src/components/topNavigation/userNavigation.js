@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
-import { RiAccountCircleLine, RiAlertLine, RiGuideLine } from 'react-icons/ri'
+import {
+  RiAccountCircleLine,
+  RiAlertLine,
+  RiGuideLine,
+  RiLoginCircleLine
+} from 'react-icons/ri'
 
 import NavItem from './navItem'
+import Login from '../login/login'
 import {
   commonAllergies,
   dietOptions,
@@ -14,6 +20,7 @@ const UserNavigation = () => {
   const [showDiets, setShowDiets] = useState(false)
   const [showAllergies, setShowAllergies] = useState(false)
   const [showAccount, setShowAccount] = useState(false)
+  const [openLoginModal, setOpenLoginModal] = useState(false)
 
   const [userDiets, setUserDiets] = useState(testDiets)
   const [allergies, setAllergies] = useState(testAllergies)
@@ -132,6 +139,11 @@ const UserNavigation = () => {
       icon: (<RiAccountCircleLine className='nav-item-icon' />),
       handleClick: () => handleItemClick(showAccount, setShowAccount),
     },
+    {
+      label: 'Login',
+      icon: (<RiLoginCircleLine className='nav-item-icon' />),
+      handleClick: () => handleItemClick(openLoginModal, setOpenLoginModal)
+    },
   ]
 
   return (
@@ -151,6 +163,7 @@ const UserNavigation = () => {
       <ul>{showDiets && diets}</ul>
       <ul>{showAllergies && userAllergies}</ul>
       {showAccount && accountView}
+      {openLoginModal && <Login isOpen={openLoginModal} />}
     </div>
   )
 }

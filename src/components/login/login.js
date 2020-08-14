@@ -3,24 +3,17 @@ import ReactModal from 'react-modal'
 import PropTypes from 'prop-types'
 
 import AccountCreation from './accountCreation'
+import FoodPreferences from './foodPreferences'
 
 
 const Login = ({ isOpen }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen)
-  // 0 = initial
-  // 1 = login
-  // 2 = create account
-  // 3 = food info: diet and allergies
   const [activeContent, setActiveContent] = useState(false)
+  const [userId, setUserId] = useState('')
 
   const toggleModal = () => {
     let newView = !isModalOpen
     setIsModalOpen(newView)
-  }
-
-  const changeContent = newContent => {
-    // let newContent = !activeContent
-    setActiveContent(newContent)
   }
 
   const initialContent = (
@@ -28,12 +21,12 @@ const Login = ({ isOpen }) => {
       <button className='modal-close' onClick={toggleModal}>X</button>
       <button
         className='button-login'
-        onClick={() => changeContent(1)}>
+        onClick={() => setActiveContent(1)}>
         Login
       </button>
       <button
         className='button-create-account'
-        onClick={() => changeContent(2)}>
+        onClick={() => setActiveContent(2)}>
         Create Account
       </button>
     </span>
@@ -46,13 +39,6 @@ const Login = ({ isOpen }) => {
     </span>
   )
 
-  const foodInfo = (
-    <span>
-      <button className='modal-close' onClick={toggleModal}>X</button>
-      <div>NEXT UP</div>
-    </span>
-  )
-
   // 0 = initial
   // 1 = login
   // 2 = create account
@@ -61,8 +47,14 @@ const Login = ({ isOpen }) => {
   return (
     <ReactModal isOpen={isModalOpen}>
       {
-        activeContent === 3 ? foodInfo
-        : activeContent === 2 ? <AccountCreation changeContent={changeContent} />
+        activeContent === 3 ? <FoodPreferences
+                                changeContent={setActiveContent}
+                                userId={userId}
+                              />
+        : activeContent === 2 ? <AccountCreation
+                                  changeContent={setActiveContent}
+                                  receiveUserId={setUserId}
+                                />
         : activeContent === 1 ? loginContent
         : initialContent
       }

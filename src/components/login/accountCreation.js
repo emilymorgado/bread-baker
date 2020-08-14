@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+
 import firebase from '../../firestore'
 
-const AccountCreation = ({ changeContent }) => {
+
+const AccountCreation = ({ changeContent, receiveUserId }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,6 +26,7 @@ const AccountCreation = ({ changeContent }) => {
         setEmail('')
         setPassword('')
         changeContent(3)
+        receiveUserId(docRef.id)
       })
       .catch(function(error) {
         console.error(`Error writing document: ${error}`);
@@ -75,6 +78,7 @@ const AccountCreation = ({ changeContent }) => {
 
 AccountCreation.propTypes = {
   changeContent: PropTypes.func,
+  receiveUserId: PropTypes.func,
 }
 
 export default AccountCreation

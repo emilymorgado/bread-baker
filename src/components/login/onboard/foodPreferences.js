@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { commonAllergies, dietOptions } from '../topNavigation/staticData'
-import firebase from '../../firestore'
+import { commonAllergies, dietOptions } from '../../topNavigation/staticData'
+import firebase from '../../../firestore'
 
 
 const FoodPreferences = ({ changeContent, userId }) => {
@@ -44,7 +44,7 @@ const FoodPreferences = ({ changeContent, userId }) => {
     .catch(function(error) {
       console.error(`Error writing document: ${error}`);
     })
-    changeContent(0)
+    changeContent(4)
   }
 
   const userDiets = dietOptions.map((option, index) => {

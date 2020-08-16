@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import firebase from '../../firestore'
+import firebase from '../../../firestore'
 
 
 const AccountCreation = ({ changeContent, receiveUserId }) => {

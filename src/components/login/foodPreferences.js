@@ -6,7 +6,7 @@ import firebase from '../../firestore'
 
 
 const FoodPreferences = ({ changeContent, userId }) => {
-  const [userDiets, setUserDiets] = useState([])
+  const [diets, setDiets] = useState([])
   const [allergies, setAllergies] = useState([])
 
   const [selectedDiets, setSelectedDiets] = useState(new Set([]))
@@ -47,25 +47,23 @@ const FoodPreferences = ({ changeContent, userId }) => {
     changeContent(0)
   }
 
-  const diets = dietOptions.map((option, index) => {
+  const userDiets = dietOptions.map((option, index) => {
     return (
-      <li
-        className='list-shopping'
-        key={option}
-        onClick={() => handleCheckboxChange(
-          index,
-          option,
-          userDiets,
-          setUserDiets,
-          selectedDiets,
-          setSelectedDiets
-        )}>
+      <li className='list-shopping' key={option}>
         <input
           className='checkbox-shopping'
           name={option}
           type='checkbox'
-          checked={userDiets[index]}
+          checked={diets[index]}
           onChange={() => {}}
+          onClick={() => handleCheckboxChange(
+            index,
+            option,
+            diets,
+            setDiets,
+            selectedDiets,
+            setSelectedDiets
+          )}
         />
         <label className='list-shopping'>
           {option}
@@ -76,23 +74,21 @@ const FoodPreferences = ({ changeContent, userId }) => {
 
   const userAllergies = commonAllergies.map((allergy, index) => {
     return (
-      <li
-        className='list-shopping'
-        key={allergy}
-        onClick={() => handleCheckboxChange(
-          index,
-          allergy,
-          allergies,
-          setAllergies,
-          selectedAllergies,
-          setSelectedAllergies,
-        )}>
+      <li className='list-shopping' key={allergy}>
         <input
           className='checkbox-shopping'
           name={allergy}
           type='checkbox'
           checked={allergies[index]}
           onChange={() => {}}
+          onClick={() => handleCheckboxChange(
+            index,
+            allergy,
+            allergies,
+            setAllergies,
+            selectedAllergies,
+            setSelectedAllergies,
+          )}
         />
         <label className='list-shopping'>
           {allergy}
@@ -106,7 +102,7 @@ const FoodPreferences = ({ changeContent, userId }) => {
       <button className='modal-close' onClick={() => changeContent(0)}>X</button>
       <h1>These recipes need to fit your needs!</h1>
       <h2>Any dietary restrictions?</h2>
-      <ul>{diets}</ul>
+      <ul>{userDiets}</ul>
       <h2>How about allergies or intolerances?</h2>
       <ul>{userAllergies}</ul>
       <button onClick={addFoodPreferences}>Update Info</button>

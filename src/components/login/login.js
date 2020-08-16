@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import PropTypes from 'prop-types'
 
-import AccountCreation from './accountCreation'
-import FoodPreferences from './foodPreferences'
+import AccountCreation from './onboard/accountCreation'
+import FoodPreferences from './onboard/foodPreferences'
+import Tour from './onboard/tour'
 
 
 const Login = ({ isOpen }) => {
@@ -43,11 +44,13 @@ const Login = ({ isOpen }) => {
   // 1 = login
   // 2 = create account
   // 3 = food info: diet and allergies
+  // 4 = product tour
 
   return (
     <ReactModal isOpen={isModalOpen}>
       {
-        activeContent === 3 ? <FoodPreferences
+        activeContent === 4 ? <Tour toggleModal={toggleModal} />
+        : activeContent === 3 ? <FoodPreferences
                                 changeContent={setActiveContent}
                                 userId={userId}
                               />

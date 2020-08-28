@@ -20,14 +20,15 @@ const TopNavigation = () => {
 
   return (
     <div className='container-top-navigation'>
-      <span className='container-user-navigation'>
-        <RiHomeGearLine className='navigation-icon' onClick={handleUserNavClick} />
-        {showUserNav && <UserNavigation />}
-      </span>
       <span className='container-cooking-navigation'>
         <RiCake3Line className='navigation-icon' onClick={handleCookingNavClick} />
         {showCookingNav && <div>component: CookingNavigation</div>}
       </span>
+      <span className='container-user-navigation'>
+        <RiHomeGearLine className='navigation-icon' onClick={handleUserNavClick} />
+        {showUserNav && <UserNavigation closeUserNav={handleUserNavClick} />}
+      </span>
+
     </div>
   )
 }

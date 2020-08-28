@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import {
   RiAccountCircleLine,
   RiAlertLine,
@@ -16,7 +17,7 @@ import {
 } from './staticData'
 
 
-const UserNavigation = () => {
+const UserNavigation = ({ closeUserNav }) => {
   const [showDiets, setShowDiets] = useState(false)
   const [showAllergies, setShowAllergies] = useState(false)
   const [showAccount, setShowAccount] = useState(false)
@@ -163,9 +164,13 @@ const UserNavigation = () => {
       <ul>{showDiets && diets}</ul>
       <ul>{showAllergies && userAllergies}</ul>
       {showAccount && accountView}
-      {openLoginModal && <Login isOpen={openLoginModal} />}
+      {openLoginModal && <Login isOpen={openLoginModal} closeUserNav={closeUserNav} />}
     </div>
   )
+}
+
+UserNavigation.propTypes = {
+  closeUserNav: PropTypes.func,
 }
 
 export default UserNavigation

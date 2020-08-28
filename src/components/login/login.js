@@ -7,7 +7,7 @@ import FoodPreferences from './onboard/foodPreferences'
 import Tour from './onboard/tour'
 
 
-const Login = ({ isOpen }) => {
+const Login = ({ isOpen, closeUserNav }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen)
   const [activeContent, setActiveContent] = useState(false)
   const [userId, setUserId] = useState('')
@@ -15,6 +15,7 @@ const Login = ({ isOpen }) => {
   const toggleModal = () => {
     let newView = !isModalOpen
     setIsModalOpen(newView)
+    closeUserNav()
   }
 
   const initialContent = (
@@ -67,6 +68,7 @@ const Login = ({ isOpen }) => {
 
 Login.propTypes = {
   isOpen: PropTypes.bool,
+  closeUserNav: PropTypes.func,
 }
 
 export default Login

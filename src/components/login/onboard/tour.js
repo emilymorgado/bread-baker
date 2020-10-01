@@ -9,9 +9,9 @@ const Tour = ({ toggleModal }) => {
   const buttonDone = <button onClick={toggleModal}>Done</button>
   const changeInstruction = () => {
     setHeading(`Projects teach you skills!`)
-    setInstruction(`Blue recipes are unlocked and ready to be tried.
+    setInstruction(`Blue recipes are unlocked.
       Green recipes have been completed at least once.
-      Locked recipes will unlock when their prerequisites are completed!
+      Locked recipes will unlock once their prerequisites are completed.
     `)
     setButtonType(buttonDone)
   }

@@ -143,7 +143,7 @@ const UserNavigation = ({ closeUserNav }) => {
     {
       label: 'Login',
       icon: (<RiLoginCircleLine className='nav-item-icon' />),
-      handleClick: () => handleItemClick(openLoginModal, setOpenLoginModal)
+      handleClick: () => handleItemClick(openLoginModal, setOpenLoginModal),
     },
   ]
 

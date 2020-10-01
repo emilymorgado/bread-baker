@@ -29,25 +29,26 @@ const App = () => {
 
   return (
     <div className="container">
-      <TopNavigation/>
+      <TopNavigation />
       <h1>PROJECTS</h1>
-       {showMenu &&
-         <ProjectNavigation
+      {user && <h2>Welcome {user.name}</h2>}
+      {showMenu &&
+        <ProjectNavigation
           showAll={showAll}
           toggleDisplay={toggleDisplay}
-         />
-       }
-       {showMenu ?
-         <Menu
+        />
+      }
+      {showMenu ?
+        <Menu
           showAll={showAll}
           displayDirections={displayDirections}
-         /> :
-         <Directions
+        /> :
+        <Directions
           recipe={openRecipe}
           displayDirections={displayDirections}
           step={Number(activeStep)}
-         />
-       }
+        />
+      }
     </div>
   )
 }

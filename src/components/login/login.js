@@ -5,17 +5,45 @@ import PropTypes from 'prop-types'
 import AccountCreation from './onboard/accountCreation'
 import FoodPreferences from './onboard/foodPreferences'
 import Tour from './onboard/tour'
+import firebase from '../../firestore'
 
 
 const Login = ({ isOpen, closeUserNav }) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen)
   const [activeContent, setActiveContent] = useState(false)
-  const [userId, setUserId] = useState('')
+  const [user, setUser] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleTextChange = (update, event) => {
+    update(event.target.value)
+  }
 
   const toggleModal = () => {
     let newView = !isModalOpen
     setIsModalOpen(newView)
     closeUserNav()
+  }
+
+  const logIn = (email, password) => {
+    if (!email || !password) {
+      console.log('TODO: throw a validation error')
+    }
+
+    firebase.collection("users").where("email", "==", email)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          if (doc.data().password === password) {
+            const user = { id: doc.data().id, name: doc.data().name}
+            setUser(user)
+            toggleModal()
+          }
+        })
+      })
+      .catch(function(error) {
+        console.log("Error getting document:", error);
+    });
   }
 
   const initialContent = (
@@ -38,6 +66,29 @@ const Login = ({ isOpen, closeUserNav }) => {
     <span>
       <button className='modal-close' onClick={toggleModal}>X</button>
       <div>COMING SOON</div>
+      <ul>
+        <li>
+          <p>Email:</p>
+          <input
+            className='textarea-account'
+            type='email'
+            placeholder={email}
+            onChange={(event) => handleTextChange(setEmail, event)}
+            value={email}
+          />
+        </li>
+        <li>
+          <p>Password:</p>
+          <input
+            className='textarea-account'
+            type='password'
+            placeholder={password}
+            onChange={(event) => handleTextChange(setPassword, event)}
+            value={password}
+          />
+        </li>
+      </ul>
+      <button onClick={() => logIn(email, password)}>Log In</button>
     </span>
   )
 
@@ -53,11 +104,11 @@ const Login = ({ isOpen, closeUserNav }) => {
         activeContent === 4 ? <Tour toggleModal={toggleModal} />
         : activeContent === 3 ? <FoodPreferences
                                 changeContent={setActiveContent}
-                                userId={userId}
+                                userId={user.id}
                               />
         : activeContent === 2 ? <AccountCreation
                                   changeContent={setActiveContent}
-                                  receiveUserId={setUserId}
+                                  receiveUser={setUser}
                                 />
         : activeContent === 1 ? loginContent
         : initialContent

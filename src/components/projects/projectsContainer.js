@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import firebase from '../firestore'
 import Card from './card'
+import firebase from '../../firestore'
 
 
-const Menu = ({ displayDirections, showAll }) => {
+const ProjectsContainer = ({ displayDirections, showAll }) => {
   const [unlockedRecipes, setUnlockedRecipes] = useState(new Set())  //change var name
   const [allRecipes, setAllRecipes] = useState([])
   const [user, setUser] = useState(null)
@@ -80,9 +80,9 @@ const Menu = ({ displayDirections, showAll }) => {
     )
 }
 
-Menu.propTypes ={
+ProjectsContainer.propTypes ={
   displayDirections: PropTypes.func,
   showAll: PropTypes.bool,
 }
 
-export default Menu;
+export default ProjectsContainer;
